@@ -39,22 +39,31 @@ code {
   margin-bottom: 0px;
 }
 
-.btn-primary {
-  height: 30px;
-  width: 200px;
-  border-radius: 6px;
-  font: var(--font-family);
-  border: 1px solid #ffffff;
-  background: #041f43;
+/* .btn-primary {
+  background: #5E5DF0;
+  border-radius: 999px;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
   cursor: pointer;
-  transition: all 0.5s;
-  font-size: 15px;
-  color: #ffffff;
-}
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+} */
 
-.btn-primary:active {
+/* .btn-primary:active {
   border: 1px solid #1f4373;
-}
+} */
 
 .notification-banner {
   position: absolute;
@@ -70,4 +79,73 @@ code {
 .notification-banner-link {
   margin-left: 4px;
   color: #ffffff;
+}
+
+
+
+.btn-primary {
+  all: unset;
+  width: 100px;
+  height: 30px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  position: relative;
+  color: #f0f0f0;
+  cursor: pointer;
+  z-index: 1;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn-primary::after,
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -99999;
+  transition: all .4s;
+}
+
+.btn-primary::before {
+  transform: translate(0%, 0%);
+  width: 100%;
+  height: 100%;
+  background: #5E5DF0;
+  border-radius: 10px;
+}
+
+.btn-primary::after {
+  transform: translate(10px, 10px);
+  width: 35px;
+  height: 35px;
+  background: #ffffff15;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 50px;
+}
+
+.btn-primary:hover::before {
+  transform: translate(5%, 20%);
+  width: 110%;
+  height: 110%;
+}
+
+.btn-primary:hover::after {
+  border-radius: 10px;
+  transform: translate(0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+.btn-primary:active::after {
+  transition: 0s;
+  transform: translate(0, 5%);
 }

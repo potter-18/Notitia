@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getToken, getMessaging, onMessage, deleteToken } from 'firebase/messaging';
-import { getDatabase, ref, set, remove, query, onValue, push} from "firebase/database"
+import { getDatabase, ref, set, remove, query} from "firebase/database"
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut} from "firebase/auth";
 
 const firebaseConfig = {
@@ -18,13 +18,8 @@ const messaging = getMessaging(firebaseApp);
 const database = getDatabase();
 
 
-
-
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
-
-export let token = ""
-
 
 export const signIn = () => {
   signInWithPopup(auth, provider)
@@ -68,17 +63,9 @@ export const subscribeButton = () => {
           "BBhiEzNEIZhoe0st_ngva0ADh-SEVaaUb1QiDJVqqvhdrI3eJkh76QMgKt8-cFpJk_rIG4WQ8k8fHTk2LNLi6rE",
       }).then((currentToken) => {
         if (currentToken) {
-          token = currentToken.slice()
           console.log("currentToken: ", currentToken);
           set(ref(database, "/tokens/" + auth.currentUser.uid), {
             name: auth.currentUser.displayName,
-            uid: auth.currentUser.uid,
-            token: currentToken,
-            accessToken: auth.currentUser.accessToken
-          });
-          const postListRef = ref(database, "/notifications");
-          const newPostRef = push(postListRef);
-          set(newPostRef, {
             token: currentToken
           });
         } else {
@@ -108,14 +95,3 @@ export const unsubscribeButton = () => {
 
 export const onForegroundMessage = () =>
 new Promise((resolve) => onMessage(messaging, (payload) => resolve(payload)));
-
-
-
-export const allids = () => {
-  onValue(ref(database, '/notifications/{notificationId}'), (snapshot) => {
-    console.log(snapshot)
-    // ...
-  }, {
-    onlyOnce: true
-  });
-}
