@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "admin-notitia",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
