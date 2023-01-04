@@ -3,13 +3,14 @@ import { getToken, getMessaging, onMessage, deleteToken } from 'firebase/messagi
 import { getDatabase, ref, set, remove, query} from "firebase/database"
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut} from "firebase/auth";
 
+// Add Congif data provided in firebase project creation.
 const firebaseConfig = {
-    apiKey: "AIzaSyDrHXIF6tg-3u142utCjmy0IfK3SH-xJkc",
-    authDomain: "tally-notitia.firebaseapp.com",
-    projectId: "tally-notitia",
-    storageBucket: "tally-notitia.appspot.com",
-    messagingSenderId: "286442771525",
-    appId: "1:286442771525:web:609302b89b5ab25d89bf2c",
+    apiKey: "",
+    authDomain: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: "",
   };
 
 
@@ -59,8 +60,7 @@ export const subscribeButton = () => {
   Notification.requestPermission().then((permission) => {
     if (permission === "granted") {
       getToken(messaging, {
-        vapidKey:
-          "BBhiEzNEIZhoe0st_ngva0ADh-SEVaaUb1QiDJVqqvhdrI3eJkh76QMgKt8-cFpJk_rIG4WQ8k8fHTk2LNLi6rE",
+        vapidKey: "",  // Add VAP Id provided at the time of FCM registration
       }).then((currentToken) => {
         if (currentToken) {
           console.log("currentToken: ", currentToken);
@@ -76,11 +76,11 @@ export const subscribeButton = () => {
   });
 };
 
+// Add VAP Id provided at the time of FCM registration
 
 export const unsubscribeButton = () => {
   deleteToken(messaging, {
-    vapidKey:
-      "BBhiEzNEIZhoe0st_ngva0ADh-SEVaaUb1QiDJVqqvhdrI3eJkh76QMgKt8-cFpJk_rIG4WQ8k8fHTk2LNLi6rE",
+    vapidKey: "",
   })
   .then(() => {
     const queryConstraints = query(
